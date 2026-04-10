@@ -13,7 +13,20 @@ app.use(express.json());
 app.use(cors());
 
 // ================= DATABASE =================
+if (!process.env.MYSQL_URL) {
+  console.error("❌ MYSQL_URL is missing!");
+  process.exit(1);
+}
+
 const db = mysql.createConnection(process.env.MYSQL_URL);
+
+db.connect((err) => {
+  if (err) {
+    console.error("DB Error:", err);
+  } else {
+    console.log("✅ MySQL Connected");
+  }
+});
 
 
 // ================= SOCKET =================
