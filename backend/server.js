@@ -13,12 +13,8 @@ app.use(express.json());
 app.use(cors());
 
 // ================= DATABASE =================
-const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "kay_atlantic",
-});
+const db = mysql.createConnection(process.env.MYSQL_URL);
+
 
 // ================= SOCKET =================
 const server = http.createServer(app);
