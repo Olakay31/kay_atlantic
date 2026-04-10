@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const API = "http://localhost:5000/api";
+const API = "https://kay-atlantic-11.onrender.com";
 
 export default function AdminDashboard({ onLogout }) {
 
