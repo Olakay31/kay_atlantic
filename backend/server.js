@@ -13,7 +13,6 @@ app.use(express.json());
 app.use(cors());
 
 // ================= DATABASE =================
-const mysql = require("mysql2");
 
 // parse manually instead of using raw URL
 const db = mysql.createConnection({
