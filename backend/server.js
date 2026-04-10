@@ -13,12 +13,16 @@ app.use(express.json());
 app.use(cors());
 
 // ================= DATABASE =================
-if (!process.env.MYSQL_URL) {
-  console.error("❌ MYSQL_URL is missing!");
-  process.exit(1);
-}
+const mysql = require("mysql2");
 
-const db = mysql.createConnection(process.env.MYSQL_URL);
+// parse manually instead of using raw URL
+const db = mysql.createConnection({
+  host: "metro.proxy.rlwy.net",
+  user: "root",
+  password: "kay_atlantic",
+  database: "railway",
+  port: 40842,
+});
 
 db.connect((err) => {
   if (err) {
