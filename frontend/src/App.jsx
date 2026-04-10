@@ -25,7 +25,7 @@ export default function App() {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const socket = io("http://localhost:5000");
+  const socket = io("https://kay-atlantic-11.onrender.com");
 
   // ================= LOAD USER =================
   useEffect(() => {
