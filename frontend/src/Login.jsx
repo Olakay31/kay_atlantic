@@ -16,46 +16,55 @@ export default function Login({ onLogin }) {
   const [message, setMessage] = useState("");
 
   // ================= LOGIN =================
-//   const handleLogin = async () => {
-//     if (!email || !password) {
-//       setError("Enter email and password");
-//       return;
-//     }
+const handleLogin = async () => {
+  if (!email || !password) {
+    setError("Enter email and password");
+    return;
+  }
 
-//     setLoading(true);
-//     setError("");
-//     setMessage("");
+  setLoading(true);
+  setError("");
+  setMessage("");
 
-//     try {
-//       fetch(`${API}/api/auth/login`, {
-//   method: "POST",
-//   headers: {
-//     "Content-Type": "application/json",
-//   },
-//   body: JSON.stringify({
-//     email,
-//     password,
-//   }),
-// })
+  try {
+    const res = await fetch(`${API}/api/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
 
-//       let data;
-//       try {
-//         data = await res.json();
-//       } catch {
-//         throw new Error("Invalid server response");
-//       }
+    const data = await res.json();
 
-//       if (!res.ok) {
-//         setError(data.message || "Invalid email or password");
-//         return;
-//       }
-fetch(`${API}/api/auth/login`, {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify({ email, password }),
-});
+    if (!res.ok) {
+      setError(data.message || "Invalid email or password");
+      return;
+    }
+
+    // ✅ Save user
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("user", JSON.stringify(data.user));
+
+    setMessage("Login successful!");
+
+    setTimeout(() => {
+      onLogin();
+
+      if (data.user.role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/dashboard");
+      }
+    }, 500);
+
+  } catch (err) {
+    console.error(err);
+    setError("Cannot connect to server.");
+  } finally {
+    setLoading(false);
+  }
+};
 
       // ✅ Save user
       localStorage.setItem("token", data.token);
@@ -93,7 +102,7 @@ fetch(`${API}/api/auth/login`, {
     setError("");
 
     try {
-      const res = await fetch(`${API}/auth/register`, {
+      const res = await fetch(`${API}/api/auth/register`, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({ name, email, password })
@@ -127,7 +136,7 @@ fetch(`${API}/api/auth/login`, {
     setError("");
 
     try {
-      const res = await fetch(`${API}/auth/forgot-password`, {
+      const res = await fetch(`${API}/api/auth/forgot-password`, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({ email })
