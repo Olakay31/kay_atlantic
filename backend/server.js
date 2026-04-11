@@ -18,7 +18,7 @@ app.use(cors());
 const db = mysql.createConnection({
   host: "metro.proxy.rlwy.net",
   user: "root",
-  password: "kay_atlantic",
+  password: "DUYuLIjvXchjjTAxdEyCuRzBqKEyOyxM ",
   database: "railway",
   port: 40842,
 });
