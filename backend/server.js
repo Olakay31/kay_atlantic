@@ -14,8 +14,6 @@ app.use(cors());
 
 // ================= DATABASE =================
 
-const mysql = require("mysql2");
-
 if (!process.env.MYSQL_URL) {
   console.error("❌ MYSQL_URL NOT FOUND");
   process.exit(1);
