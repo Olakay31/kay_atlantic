@@ -28,16 +28,16 @@ export default function Login({ onLogin }) {
     setMessage("");
 
     try {
-      const res = await fetch(`${API}/auth/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          email: email.trim(),
-          password: password.trim()
-        })
-      });
+      fetch(`${API}/api/auth/login`, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    email,
+    password,
+  }),
+})
 
       let data;
       try {

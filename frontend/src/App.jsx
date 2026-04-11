@@ -25,7 +25,11 @@ export default function App() {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const socket = io("https://kay-atlantic-11.onrender.com");
+
+
+const socket = io("https://kay-atlantic-11.onrender.com", {
+  transports: ["websocket"],
+});
 
   // ================= LOAD USER =================
   useEffect(() => {
