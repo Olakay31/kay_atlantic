@@ -16,11 +16,19 @@ app.use(cors());
 
 // parse manually instead of using raw URL
 const db = mysql.createConnection({
-  host: "metro.proxy.rlwy.net",
-  user: "root",
-  password: "DUYuLIjvXchjjTAxdEyCuRzBqKEyOyxM ",
-  database: "railway",
-  port: 40842,
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT,
+});
+
+db.connect((err) => {
+  if (err) {
+    console.error("DB Error:", err);
+  } else {
+    console.log("✅ MySQL Connected");
+  }
 });
 
 db.connect((err) => {
