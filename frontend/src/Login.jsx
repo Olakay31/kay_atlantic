@@ -7,7 +7,6 @@ export default function Login({ onLogin }) {
   const navigate = useNavigate();
 
   const [tab, setTab] = useState("login");
-
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,39 +16,46 @@ export default function Login({ onLogin }) {
   const [message, setMessage] = useState("");
 
   // ================= LOGIN =================
-  const handleLogin = async () => {
-    if (!email || !password) {
-      setError("Enter email and password");
-      return;
-    }
+//   const handleLogin = async () => {
+//     if (!email || !password) {
+//       setError("Enter email and password");
+//       return;
+//     }
 
-    setLoading(true);
-    setError("");
-    setMessage("");
+//     setLoading(true);
+//     setError("");
+//     setMessage("");
 
-    try {
-      fetch(`${API}/api/auth/login`, {
+//     try {
+//       fetch(`${API}/api/auth/login`, {
+//   method: "POST",
+//   headers: {
+//     "Content-Type": "application/json",
+//   },
+//   body: JSON.stringify({
+//     email,
+//     password,
+//   }),
+// })
+
+//       let data;
+//       try {
+//         data = await res.json();
+//       } catch {
+//         throw new Error("Invalid server response");
+//       }
+
+//       if (!res.ok) {
+//         setError(data.message || "Invalid email or password");
+//         return;
+//       }
+fetch(`${API}/api/auth/login`, {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
   },
-  body: JSON.stringify({
-    email,
-    password,
-  }),
-})
-
-      let data;
-      try {
-        data = await res.json();
-      } catch {
-        throw new Error("Invalid server response");
-      }
-
-      if (!res.ok) {
-        setError(data.message || "Invalid email or password");
-        return;
-      }
+  body: JSON.stringify({ email, password }),
+});
 
       // ✅ Save user
       localStorage.setItem("token", data.token);
