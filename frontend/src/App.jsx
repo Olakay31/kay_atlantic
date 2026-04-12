@@ -15,7 +15,7 @@ import {
   FaUserCircle,
 } from "react-icons/fa";
 
-const API = "https://kay-atlantic-11.onrender.com/api";
+const API = "https://kay-atlantic-16.onrender.com/api";
 
 
 // ✅ MOVE SOCKET INSIDE COMPONENT
@@ -27,7 +27,7 @@ export default function App() {
 
 
 
-const socket = io("https://kay-atlantic-11.onrender.com", {
+const socket = io("https://kay-atlantic-16.onrender.com", {
   transports: ["websocket"],
 });
 
